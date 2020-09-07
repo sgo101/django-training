@@ -23,7 +23,6 @@ def send_activation_email(reciver_emails, username, domain, uid, token):
     subject = 'Confirm your email'
     # content = 'This is the content of the email'
     sender = 'saeidtempmail@gmail.com'
-    recivers = reciver_emails
     # send_mail(subject, content, sender, recivers)  # function to send email
     # get a template and render it (basically the html page)
     html_msg =  render_to_string('mail_test/verfiy_msg.html', {
@@ -34,7 +33,7 @@ def send_activation_email(reciver_emails, username, domain, uid, token):
     })  
     # if you are not strip the message it will send as html page and render like html page on browser
     message = strip_tags(html_msg)  # remove any things like tags <>
-    send_mail(subject, html_msg, sender, recivers)  # send eamil
+    send_mail(subject, html_msg, sender, reciver_emails)  # send eamil
     print(html_msg)
 
 
@@ -54,7 +53,7 @@ def register(request):
             token = tokens.default_token_generator.make_token(user)
             send_activation_email([email_to], username, domain, user_id, token)
 
-            return redirect('user201')
+            return redirect('mail:user201')
 
     else:
         form = UserRegistrationForm()
@@ -76,7 +75,10 @@ def activate(request, uidb64, token):
     if user is not None and tokens.default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return render(request, 'mail_test/confirmed.html')
+        import time
+        time.sleep(5)
+        return redirect('mail:login')
     else:
         return HttpResponse('Activation link is invalid!')
 
