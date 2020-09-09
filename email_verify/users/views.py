@@ -12,15 +12,6 @@ from .forms import UserRegistrationForm
 
 
 
-def bread(path: str) -> list:
-    p = []
-    paths = path.split('/')
-    paths = [path for path in paths if path != '']
-
-    for i in range(len(paths)):
-        p.append('/'.join(paths[:i+1]) + '/')
-
-    return p
 
 
 def send_activation_email(reciver_emails, username, domain, uid, token):
@@ -67,8 +58,7 @@ def register(request):
     else:
         form = UserRegistrationForm()
         
-    paths = bread(get_current_site(request).domain + request.path)
-    return render(request, 'users/register.html', {'form': form, 'paths':paths})
+    return render(request, 'users/register.html', {'form': form})
 
 
 def activate(request, uid, token):

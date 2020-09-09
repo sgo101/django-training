@@ -6,9 +6,6 @@
 {% block title %}Register{% endblock title %}
 {% block content %}
 	<h1>Register Page</h1>
-	{% for path in paths %}
-		<p>{{ path }}<p>
-	{% endfor %}
 	<div style="width: 50%">
 		<form method="POST">
 			{% csrf_token %}
