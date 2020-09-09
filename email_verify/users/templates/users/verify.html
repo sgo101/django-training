@@ -1,0 +1,11 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<body>
+	<p>Hi <b>{{ username }}</b></p>
+	<h1>Click the link blow to confirm your email.</h1>
+	<!-- Link to confirm -->
+	<a href="http://{{ domain }}{% url 'users:activate' uid=uid token=token %}">Confirm you email {{ token }}</a>
+	<img src="{% static 'users/pic.jpg' %}" alt="The image">
+</body>
+</html>

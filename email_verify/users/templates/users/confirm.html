@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Confirmed{% endblock title %}
+{% block content %}
+<h3>Your email confirmed</h1>
+<h4>You can login with your username and email</h4>
+
+<script type="text/javascript">
+    setTimeout(function() {
+        window.location.href = "{% url 'users:login' %}";
+    }, 2000);
+</script>
+{% endblock content %}
