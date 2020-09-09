@@ -5,6 +5,9 @@
 
 {% block title %}Register{% endblock title %}
 {% block content %}
+	{% for name, link in paths.items %}
+		<a href="http://{{request.get_host}}/{{ link }}"> {{ name }} > </a>
+	{% endfor %}
 	<h1>Register Page</h1>
 	<div style="width: 50%">
 		<form method="POST">

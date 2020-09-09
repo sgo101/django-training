@@ -48,12 +48,12 @@ def bread(path):
     path_dict = {}
     paths = path.split('/')
     paths = [path for path in paths if path != '']
-    path_dict = dict.fromkeys(paths)
+    # path_dict = dict.fromkeys(paths)
     for i in range(len(paths)):
         p = ('/'.join(paths[:i+1]) + '/')
         key = [s for s in p.split('/') if s != ''][-1]
         path_dict[key] = p
-    # return path_dict
+    return path_dict
 
 
 
